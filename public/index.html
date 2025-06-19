@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyScout AI - Clinical Trial Recruitment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results {
+            display: none;
+        }
+        
+        .participant-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .score {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .platform-badge {
+            background: #e1e5e9;
+            color: #555;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .masumi-badge {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>StudyScout AI</h1>
+            <p>AI-Powered Clinical Trial Recruitment</p>
+        </div>
+        
+        <div class="card">
+            <h2>Configure Study Parameters</h2>
+            <form id="studyForm">
+                <div class="form-group">
+                    <label for="condition">Medical Condition</label>
+                    <input type="text" id="condition" name="condition" placeholder="e.g., Type 2 Diabetes" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ageRange">Age Range</label>
+                    <input type="text" id="ageRange" name="ageRange" placeholder="e.g., 18-75" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., Boston, MA" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="inclusion">Key Inclusion Criteria</label>
+                    <textarea id="inclusion" name="inclusion" rows="3" placeholder="e.g., HbA1c > 7.0, on metformin therapy"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exclusion">Key Exclusion Criteria</label>
+                    <textarea id="exclusion" name="exclusion" rows="3" placeholder="e.g., Type 1 diabetes, pregnancy"></textarea>
+                </div>
+                
+                <button type="submit" class="btn" id="searchBtn">
+                    🔍 Find Participants
+                </button>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>StudyScout AI is analyzing participants...</p>
+            <p><small>Privacy-protected analysis across platforms</small></p>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="card">
+                <h2>Found Participants</h2>
+                <div id="participantsList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('studyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const studyConfig = {
+                condition: formData.get('condition'),
+                ageRange: formData.get('ageRange'),
+                location: formData.get('location'),
+                inclusion: formData.get('inclusion'),
+                exclusion: formData.get('exclusion')
+            };
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('searchBtn').disabled = true;
+            
+            try {
+                const response = await fetch('/api/search-participants', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ studyConfig })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('searchBtn').disabled = false;
+            }
+        });
+        
+        function displayResults(data) {
+            const participantsList = document.getElementById('participantsList');
+            participantsList.innerHTML = '';
+            
+            if (data.participants.length === 0) {
+                participantsList.innerHTML = '<p>No suitable participants found. Try adjusting your criteria.</p>';
+                document.getElementById('results').style.display = 'block';
+                return;
+            }
+            
+            data.participants.forEach((participant, index) => {
+                const card = document.createElement('div');
+                card.className = 'participant-card';
+                
+                const score = participant.eligibilityScore.overallScore;
+                const scoreColor = score > 70 ? '#00d4aa' : score > 50 ? '#ffa500' : '#667eea';
+                
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span class="score" style="background: ${scoreColor}">Score: ${score}%</span>
+                        <span class="platform-badge">${participant.platform}</span>
+                    </div>
+                    <p style="margin-bottom: 10px; color: #666;">
+                        <strong>Source:</strong> ${participant.source}
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        ${participant.content.substring(0, 200)}${participant.content.length > 200 ? '...' : ''}
+                    </p>
+                    <div style="background: #e8f4fd; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Analysis:</strong> ${participant.eligibilityScore.reasoning}
+                    </div>
+                    <button class="btn" onclick="showOutreach('${participant.id}')" style="font-size: 14px; padding: 8px 16px;">
+                        📧 Generate Outreach
+                    </button>
+                `;
+                
+                participantsList.appendChild(card);
+            });
+            
+            // Store data globally for outreach function
+            window.searchResults = data;
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function showOutreach(participantId) {
+            const participant = window.searchResults.participants.find(p => p.id === participantId);
+            const outreach = window.searchResults.outreach.find(o => o.participantId === participantId);
+            
+            if (outreach) {
+                alert(`Outreach Strategy:\n\nMethod: ${outreach.strategy.method}\n\nMessage:\n${outreach.strategy.message}`);
+            } else {
+                alert('Outreach strategy not available for this participant.');
+            }
+        }
+    </script>
+</body>
+</html>

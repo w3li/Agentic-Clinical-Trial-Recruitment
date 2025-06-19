@@ -1,0 +1,65 @@
+[
+  {
+    "id": "demo_001",
+    "platform": "reddit",
+    "source": "r/diabetes_t2",
+    "content": "My A1C has been consistently around 8.5 for the past 6 months. I'm 52, male, and have been on metformin for 3 years but it's not controlling my blood sugar well anymore. Doctor mentioned adding another medication. Anyone else had similar experience with combination therapy?",
+    "author": "diabetes_warrior52",
+    "url": "https://reddit.com/r/diabetes_t2/demo1",
+    "timestamp": "2024-11-15T10:30:00Z",
+    "engagement": 24,
+    "location_hint": "Boston area",
+    "age_hint": 52,
+    "condition_indicators": ["A1C 8.5", "metformin", "combination therapy", "blood sugar control"]
+  },
+  {
+    "id": "demo_002",
+    "platform": "reddit", 
+    "source": "r/diabetes",
+    "content": "Been dealing with type 2 diabetes for 8 years. I'm a 47-year-old woman, HbA1c is 7.8. Currently on metformin and glipizide but still struggling with post-meal spikes. Looking for advice on diet modifications or maybe newer medications.",
+    "author": "healthy_goals_47",
+    "url": "https://reddit.com/r/diabetes/demo2", 
+    "timestamp": "2024-11-14T15:20:00Z",
+    "engagement": 18,
+    "location_hint": "Northeast US",
+    "age_hint": 47,
+    "condition_indicators": ["type 2 diabetes", "HbA1c 7.8", "metformin", "glipizide", "post-meal spikes"]
+  },
+  {
+    "id": "demo_003",
+    "platform": "twitter",
+    "source": "twitter",
+    "content": "Another frustrating diabetes appointment today. My numbers are still not where they should be despite medication. A1C at 8.1 😔 Doctor wants to try a new treatment approach. Anyone tried GLP-1 agonists? #diabetes #t2d",
+    "author": "@diabetic_journey",
+    "url": "https://twitter.com/diabetic_journey/demo3",
+    "timestamp": "2024-11-13T18:45:00Z", 
+    "engagement": 31,
+    "age_hint": 45,
+    "condition_indicators": ["diabetes", "A1C 8.1", "GLP-1 agonists", "treatment approach"]
+  },
+  {
+    "id": "demo_004",
+    "platform": "reddit",
+    "source": "r/diabetes_t2", 
+    "content": "55M here, diagnosed with T2D 4 years ago. Despite diet changes and exercise, my A1C is stuck at 7.9. On metformin 2000mg daily. Doctor suggested clinical trial participation. Has anyone here participated in diabetes research studies?",
+    "author": "research_curious",
+    "url": "https://reddit.com/r/diabetes_t2/demo4",
+    "timestamp": "2024-11-12T09:15:00Z",
+    "engagement": 12,
+    "location_hint": "Massachusetts", 
+    "age_hint": 55,
+    "condition_indicators": ["T2D", "A1C 7.9", "metformin 2000mg", "clinical trial", "research studies"]
+  },
+  {
+    "id": "demo_005",
+    "platform": "reddit",
+    "source": "r/diabetes",
+    "content": "42F with gestational diabetes that became type 2 after pregnancy. Currently managing with lifestyle but A1C crept up to 7.6. Considering medication options. Would love to contribute to diabetes research if there are opportunities.",
+    "author": "mom_with_diabetes",
+    "url": "https://reddit.com/r/diabetes/demo5",
+    "timestamp": "2024-11-11T14:30:00Z",
+    "engagement": 27,
+    "age_hint": 42,
+    "condition_indicators": ["gestational diabetes", "type 2", "A1C 7.6", "medication options", "diabetes research"]
+  }
+]
