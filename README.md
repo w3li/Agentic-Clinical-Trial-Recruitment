@@ -1,7 +1,7 @@
 # StudyScout AI - Privacy-First Clinical Trial Recruitment
 
 ## 🎬 **Demo Video**
-[![StudyScout AI Demo](https://img.shields.io/badge/▶️_Watch_Demo-Loom-00D4AA?style=for-the-badge)](YOUR_LOOM_VIDEOhttps://www.loom.com/share/0d5adfc6441a41239fd047a6f83d8a59_URL_HERE)
+[![StudyScout AI Demo](https://img.shields.io/badge/▶️_Watch_Demo-Loom-00D4AA?style=for-the-badge)](https://www.loom.com/share/0d5adfc6441a41239fd047a6f83d8a59)
 
 > **🎯 See StudyScout AI in action:** Complete walkthrough showing Telegram bot registration, AI analysis, and privacy-first clinical trial matching.
 
