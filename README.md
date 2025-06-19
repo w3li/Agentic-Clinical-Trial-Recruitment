@@ -1,5 +1,10 @@
 # StudyScout AI - Privacy-First Clinical Trial Recruitment
 
+## 🎬 **Demo Video**
+[![StudyScout AI Demo](https://img.shields.io/badge/▶️_Watch_Demo-Loom-00D4AA?style=for-the-badge)](YOUR_LOOM_VIDEOhttps://www.loom.com/share/0d5adfc6441a41239fd047a6f83d8a59_URL_HERE)
+
+> **🎯 See StudyScout AI in action:** Complete walkthrough showing Telegram bot registration, AI analysis, and privacy-first clinical trial matching.
+
 ## 🎯 Project Overview
 **StudyScout AI** is a privacy-first clinical trial recruitment platform that uses AI to connect interested patients with relevant studies through encrypted messaging, while providing researchers with intelligent participant analysis.
 
